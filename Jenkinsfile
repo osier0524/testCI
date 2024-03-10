@@ -11,11 +11,16 @@ pipeline {
 
         stage('SonarQube Scan') {
             steps {
-                echo 'SonarQube scan is running...'
-                sh 'java -version'
-                sh 'echo JAVA_HOME: $JAVA_HOME'
-                // 执行 SonarQube 扫描
-                sh 'sonar-scanner -Dsonar.projectKey=YourProjectKey -Dsonar.sources=.' 
+                script {
+                    withEnv(["JAVA_HOME=/opt/java/openjdk", "PATH+JAVA=${env.JAVA_HOME}/bin"]) {
+                        echo 'SonarQube scan is running...'
+                        sh 'java -version'
+                        sh 'echo JAVA_HOME: $JAVA_HOME'
+                        // 执行 SonarQube 扫描
+                        sh 'sonar-scanner -Dsonar.projectKey=YourProjectKey -Dsonar.sources=.' 
+                    }
+
+                }
             }
         }
 
