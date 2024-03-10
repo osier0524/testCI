@@ -15,8 +15,7 @@ pipeline {
                 sh 'java -version'
                 sh 'echo JAVA_HOME: $JAVA_HOME'
                 // 执行 SonarQube 扫描
-                sh 'sonar-scanner -Dsonar.projectKey=YourProjectKey -Dsonar.sources=. -Dsonar.host.url=YourSonarQubeServerUrl -Dsonar.login=YourSonarQubeToken'
-            
+                sh 'sonar-scanner -Dsonar.projectKey=YourProjectKey -Dsonar.sources=.' 
             }
         }
 
